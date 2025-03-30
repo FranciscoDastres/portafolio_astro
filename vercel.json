@@ -1,7 +1,18 @@
 {
-    "functions": {
-      "**/*.js": { 
-        "runtime": "nodejs20.x"  
+    "version": 2,
+    "builds": [
+      {
+        "src": "dist/**/*.js",
+        "use": "@vercel/node",
+        "config": { 
+          "runtime": "nodejs20.x"
+        }
       }
-    }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "dist/$1"
+      }
+    ]
   }
