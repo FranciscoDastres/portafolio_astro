@@ -24,6 +24,7 @@ export const IconKeys = {
   nodejs: "nodejs",
   vite: "vite",
   postgres: "postgres",
+  php: "php",
   // here add more icon keys
 };
 
@@ -76,6 +77,10 @@ export const skills = [
   {
     title: "Postgresql",
     icon: IconKeys.postgres,
+  },
+  {
+    title: "Php",
+    icon: IconKeys.php,
   },
 ];
 
