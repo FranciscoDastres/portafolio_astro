@@ -11,62 +11,14 @@ import photoperfil from "../../../../public/img/photo-perfil.webp";
       <!-- <h2 class="text-hello">Hola <strong>soy</strong></h2> -->
       <h2 class="text-name">Francisco Meza Dastres</h2>
       <div class="container-profession">
-        <div>
-          <span class="p-profession">I</span>
-          <span class="p-profession">n</span>
-          <span class="p-profession">g</span>
-          <span class="p-profession">e</span>
-          <span class="p-profession">n</span>
-          <span class="p-profession">i</span>
-          <span class="p-profession">e</span>
-          <span class="p-profession">r</span>
-          <span class="p-profession">o</span>
-          <span class="p-profession"> </span>
-          <span class="p-profession"> </span>
-          <span class="p-profession">I</span>
-          <span class="p-profession">n</span>
-          <span class="p-profession">f</span>
-          <span class="p-profession">o</span>
-          <span class="p-profession">r</span>
-          <span class="p-profession">m</span>
-          <span class="p-profession">á</span>
-          <span class="p-profession">t</span>
-          <span class="p-profession">i</span>
-          <span class="p-profession">c</span>
-          <span class="p-profession">o</span>
-
-          <span class="">&nbsp;</span>
+        <div class="profession-line">
+          <span class="p-profession">Ingeniero Informático</span>
         </div>
-        <div class="">
-          <span class="p-profession">D</span>
-          <span class="p-profession">e</span>
-          <span class="p-profession">s</span>
-          <span class="p-profession">a</span>
-          <span class="p-profession">r</span>
-          <span class="p-profession">r</span>
-          <span class="p-profession">o</span>
-          <span class="p-profession">l</span>
-          <span class="p-profession">l</span>
-          <span class="p-profession">a</span>
-          <span class="p-profession">d</span>
-          <span class="p-profession">o</span>
-          <span class="p-profession">r</span>
-          <span class="p-profession"> </span>
-          <span class="p-profession"> </span>
-          <span class="p-profession">F</span>
-          <span class="p-profession">u</span>
-          <span class="p-profession">l</span>
-          <span class="p-profession">l</span>
-          <span class="p-profession">S </span>
-          <span class="p-profession">t</span>
-          <span class="p-profession">a</span>
-          <span class="p-profession">c</span>
-          <span class="p-profession">k</span>
-          <span class="">&nbsp;</span>
-          <span class="p-profession">J</span>
-          <span class="p-profession">r</span>
+        <div class="profession-line">
+          <span class="p-profession">Desarrollador FullStack Jr</span>
         </div>
       </div>
+      
       <p class="p-presentation">
         Ingeniero en Informática y Desarrollador Full Stack con más de 1 año de experiencia en la creación de aplicaciones web escalables y optimizadas.
         Especialista en tecnologías como JavaScript, PHP, React, y frameworks como Bootstrap y Tailwind. Capaz de diseñar e implementar soluciones responsivas que combinan funcionalidad y rendimiento, 
@@ -192,6 +144,7 @@ import photoperfil from "../../../../public/img/photo-perfil.webp";
   .container-profession {
     cursor: pointer;
     padding: 5px 0;
+    
   }
   .p-profession {
     font-size: 30px;
@@ -385,4 +338,11 @@ import photoperfil from "../../../../public/img/photo-perfil.webp";
       display: none;
     }
   }
+  .profession-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 2px;
+}
+
 </style>
