@@ -85,72 +85,6 @@ export const skills = [
 ];
 
 export const projects = [
-
-  {
-    img: "../../../img/cyberpunk.webp",
-    title: "cyberpunk",
-    link: "https://preeminent-liger-266356.netlify.app/",
-    description: `este proyecto se trata de un clon de la pagína de cyberpunk , donde
-      el ususario puede ver los tailer de él juegos y también los
-      episodios de la serie....`,
-    technologies: [
-      {
-        icon: IconKeys.html,
-      },
-      {
-        icon: IconKeys.css,
-      },
-      {
-        icon: IconKeys.javaScript,
-      },
-    ],
-  },
-  {
-    img: "../../../img/store-games.webp",
-    title: "Store games",
-    link: "https://store-games-site.netlify.app/",
-    description: `Simulando una página de juegos , consumiendo la API de rawg api
-      donde los usuarios pueden buscar videojuegos, ver sus detalles como
-      creadores , calificaciones,tiendas donde comprar.....`,
-    technologies: [
-      {
-        icon: IconKeys.react,
-      },
-      {
-        icon: IconKeys.css,
-      },
-      {
-        icon: IconKeys.javaScript,
-      },
-      {
-        icon: IconKeys.tailwind,
-      },
-      {
-        icon: IconKeys.reactQuery,
-      },
-    ],
-  },
-  {
-    img: "../../../img/movie.webp",
-    title: "Movie Tv",
-    link: "https://movietvsite.netlify.app/",
-    description: `simulando una página de películas , consumiendo la API de themovietv
-              donde los usuarios pueden buscar películas y ver trailer.....`,
-    technologies: [
-      {
-        icon: IconKeys.react,
-      },
-      {
-        icon: IconKeys.css,
-      },
-      {
-        icon: IconKeys.javaScript,
-      },
-      {
-        icon: IconKeys.tailwind,
-      },
-    ],
-  },
   {
     img: "../../../img/codelium.webp",
     title: "Codelium",
@@ -168,6 +102,32 @@ export const projects = [
       },
       {
         icon: IconKeys.tailwind,
+      },
+    ],
+  },
+  {
+    img: "../../../img/ImpresionArte.webp",
+    title: "ImpresionArte",
+    link: "https://impresion-arte.vercel.app/",
+    description: `Sitio web en desarrollo proyecto diseñado para ofrecer servicios de impresiones 3D`,
+    technologies: [
+      {
+        icon: IconKeys.css,
+      },
+      {
+        icon: IconKeys.javaScript,
+      },
+      {
+        icon: IconKeys.tailwind,
+      },
+      {
+        icon: IconKeys.react,
+      },
+      {
+        icon: IconKeys.nodejs,
+      },
+      {
+        icon: IconKeys.postgres,
       },
     ],
   },
