@@ -1,8 +1,0 @@
-version: "3.8"
-
-services:
-  portafolio:
-    build: .
-    ports:
-      - "4321:4321"
-    restart: always
