@@ -59,7 +59,7 @@ src/
 ## **Local configuration** 
 1. Clone the repo:  
 ```
-git clone https://github.com/Gothsec/Astro-portfolio
+git clone https://github.com/FranciscoDastres/Astro-portfolio
 ```
 2. Install dependencies:
 ```  
@@ -73,4 +73,4 @@ npm run dev
 > **Important Notice:**  
 > This project is licensed under the [MIT License](https://opensource.org/licenses/mit).  
 > According to the license terms, any redistribution (including compiled or modified versions), you **must** retain the original copyright 
-> notice and the full license text. Copyright © 2025 Oscar Hernandez. All rights reserved.
+> notice and the full license text. Copyright © 2025 Francisco Meza Dastres. All rights reserved.
