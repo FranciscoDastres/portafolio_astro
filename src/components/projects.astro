@@ -1,9 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import svgl from "../../public/svgl.png";
-import stockin from "../../public/stockin.png";
-import moviesfordevs from "../../public/moviesfordevs.png";
-import velez from "../../public/velez.png";
+import blackmichiestudio from "../../public/blackmichiestudio.png";
+import dota2proencounters from "../../public/dota2proencounters.png";
 
 interface Project {
   title: string;
@@ -15,18 +14,18 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: "MoviesForDevs",
-    image: moviesfordevs as ImageMetadata,
-    link: "https://github.com/FranciscoDastres/MoviesForDevs",
-    preview: "https://movies-for-devs.vercel.app",
-    status: "Deployed",
+    title: "Black Michi Estudio",
+    image: blackmichiestudio as ImageMetadata,
+    link: "https://github.com/FranciscoDastres/blackmichiestudiov2",
+    preview: "https://black-michi-estudio-pre-prod.vercel.app/",
+    status: "En Desarrollo etapa de pre-producción",
   },
   {
-    title: "StockIn",
-    image: stockin as ImageMetadata,
-    link: "https://github.com/FranciscoDastres/stockin-demo",
+    title: "Dota 2 pro encounters",
+    image: dota2proencounters as ImageMetadata,
+    link: "https://github.com/FranciscoDastres/dota2-pro-encounters",
     preview: "https://stockin-demo.vercel.app",
-    status: "On Development",
+    status: "En Desarrollo etapa de diseño",
   },
   {
     title: "Svgl.app",
@@ -34,13 +33,6 @@ const projects: Project[] = [
     link: "https://github.com/pheralb/svgl",
     preview: "https://svgl.app",
     status: "Contributor",
-  },
-  {
-    title: "Rifas Velez Web",
-    image: velez as ImageMetadata,
-    link: "https://github.com/Buga-Software/rifasvelez-web",
-    preview: "https://www.rifasvelez.com",
-    status: "Deployed",
   },
 ];
 ---
@@ -50,8 +42,8 @@ const projects: Project[] = [
   class="py-12 border-t border-[#ffffff10] text-[var(--white)]"
 >
   <div class="max-w-5xl mx-auto">
-    <h2 class="text-lg text-[var(--sec)] mb-2 shiny-sec">My work</h2>
-    <h3 class="text-4xl md:text-5xl font-medium mb-8">Projects</h3>
+    <h2 class="text-lg text-[var(--sec)] mb-2 shiny-sec">Mi trabajo</h2>
+    <h3 class="text-4xl md:text-5xl font-medium mb-8">Proyectos</h3>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {
