@@ -10,6 +10,7 @@ interface Project {
   link: string;
   preview: string;
   status: string;
+  description?: string;
   technologies: string[];
 }
 
@@ -19,8 +20,9 @@ const projects: Project[] = [
     image: blackmichiestudio as ImageMetadata,
     link: "https://github.com/FranciscoDastres/blackMichiEstudioPreProd",
     preview: "https://black-michi-estudio-pre-prod.vercel.app/",
-    status:
-      "Etapa de pre producción completa, en desarrollo etapa de producción",
+    status: "En desarrollo etapa de producción",
+    description:
+      "E-commerce con inventario, carrito de compras, roles de administrador y usuarios, e integración con Google.",
     technologies: ["React JS", "Node JS", "PostgreSQL"],
   },
   {
@@ -29,6 +31,8 @@ const projects: Project[] = [
     link: "https://github.com/FranciscoDastres/dota2-pro-encounters",
     preview: "https://dota-2-pro-encounters-v2-frontend.vercel.app/",
     status: "Pre producción · Próxima producción",
+    description:
+      "Consume la API de Dota 2 para detectar si alguna vez jugaste contra un jugador profesional.",
     technologies: ["Node TS", "React TS", "PostgreSQL"],
   },
   {
@@ -73,6 +77,11 @@ const projects: Project[] = [
                   <span class="py-1 text-sm text-[var(--white-icon)]">
                     {project.status}
                   </span>
+                  {project.description && (
+                    <p class="mt-1 text-sm text-[var(--white-icon)] leading-snug">
+                      {project.description}
+                    </p>
+                  )}
                   {project.technologies.length > 0 && (
                     <div class="flex flex-wrap gap-2 mt-2">
                       {project.technologies.map((tech) => (
