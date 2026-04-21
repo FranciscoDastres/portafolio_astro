@@ -10,6 +10,7 @@ interface Project {
   link: string;
   preview: string;
   status: string;
+  technologies: string[];
 }
 
 const projects: Project[] = [
@@ -20,13 +21,15 @@ const projects: Project[] = [
     preview: "https://black-michi-estudio-pre-prod.vercel.app/",
     status:
       "Etapa de pre producción completa, en desarrollo etapa de producción",
+    technologies: ["React JS", "Node JS", "PostgreSQL"],
   },
   {
-    title: "Dota 2 pro encounters",
+    title: "StormTracker",
     image: dota2proencounters as ImageMetadata,
     link: "https://github.com/FranciscoDastres/dota2-pro-encounters",
-    preview: "https://stockin-demo.vercel.app",
-    status: "En Desarrollo etapa de diseño",
+    preview: "https://dota-2-pro-encounters-v2-frontend.vercel.app/",
+    status: "Pre producción · Próxima producción",
+    technologies: ["Node TS", "React TS", "PostgreSQL"],
   },
   {
     title: "Svgl.app",
@@ -34,6 +37,7 @@ const projects: Project[] = [
     link: "https://github.com/pheralb/svgl",
     preview: "https://svgl.app",
     status: "Contributor",
+    technologies: [],
   },
 ];
 ---
@@ -69,6 +73,15 @@ const projects: Project[] = [
                   <span class="py-1 text-sm text-[var(--white-icon)]">
                     {project.status}
                   </span>
+                  {project.technologies.length > 0 && (
+                    <div class="flex flex-wrap gap-2 mt-2">
+                      {project.technologies.map((tech) => (
+                        <span class="text-xs px-2 py-1 rounded-md border border-[var(--white-icon-tr)] text-[var(--white-icon)] bg-[#1414149c]">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
                 <div class="flex gap-2 ml-auto">
                   <a
