@@ -1,20 +1,22 @@
 {
   "compilerOptions": {
-    "module": "ES2020",
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
     "noEmit": true,
     "types": [
       "astro/client"
     ],
-    "moduleResolution": "node",
     "esModuleInterop": true,
-    "baseUrl": ".",
     "paths": {
       "@/*": [
-        "src/*"
+        "./src/*"
       ],
       "@components/*": [
-        "src/components/*"
+        "./src/components/*"
       ]
     },
     "jsx": "react-jsx",
@@ -22,6 +24,7 @@
   },
   "include": [
     "src/**/*",
-    "astro.config.ts"
+    "env.d.ts",
+    "astro.config.mjs"
   ]
 }
