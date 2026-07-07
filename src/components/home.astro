@@ -1,6 +1,6 @@
 ---
-import LetterGlitch from "../React/LetterGlitch.tsx";
 import LogoWall from "../components/logoWall.astro";
+import Terminal from "../components/terminal.astro";
 import SkillsList from "../React/SkillsList.tsx";
 ---
 
@@ -89,17 +89,8 @@ import SkillsList from "../React/SkillsList.tsx";
 
     <div class="flex flex-col lg:flex-row items-center gap-8">
       <SkillsList client:load />
-      <div
-        class="flex justify-center md:w-full md:h-[292px] size-[290px] pt-3 md:pt-9 md:ml-16"
-      >
-        <LetterGlitch
-          client:load
-          glitchColors={["#5e4491", "#A476FF", "#241a38"]}
-          glitchSpeed={33}
-          centerVignette={false}
-          outerVignette={true}
-          smooth={true}
-        />
+      <div class="flex justify-center w-full pt-3 md:pt-9 lg:ml-16">
+        <Terminal />
       </div>
     </div>
   </div>

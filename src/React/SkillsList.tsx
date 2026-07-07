@@ -28,7 +28,9 @@ const CategoryIcons = {
 };
 
 const SkillsList = () => {
-  const [openItem, setOpenItem] = useState<string | null>(null);
+  const [openItem, setOpenItem] = useState<string | null>(
+    "Desarrollo de Software",
+  );
 
   const skills = {
     "Desarrollo de Software": [
@@ -39,7 +41,7 @@ const SkillsList = () => {
       "Arquitectura frontend y backend",
       "Optimización de rendimiento y buenas prácticas",
       "Control de versiones con Git",
-      "Integración de servicios en la nube ()",
+      "Integración de servicios en la nube (AWS)",
       "Despliegue y configuración de aplicaciones web"
     ]
     , "Cloud y DevOps (AWS)": [
@@ -96,10 +98,10 @@ const SkillsList = () => {
               >
                 <ul className="space-y-2 text-[var(--white-icon)] text-sm">
                   {items.map((item, index) => (
-                    <div key={index} className="flex items-center">
+                    <li key={index} className="flex items-start">
                       <span className="pl-1">•</span>
-                      <li className="pl-3">{item}</li>
-                    </div>
+                      <span className="pl-3">{item}</span>
+                    </li>
                   ))}
                 </ul>
               </div>
