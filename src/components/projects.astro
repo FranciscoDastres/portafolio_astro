@@ -3,6 +3,8 @@ import { Image } from "astro:assets";
 import svgl from "../../public/svgl.png";
 import blackmichiestudio from "../../public/blackmichiestudio.png";
 import dota2proencounters from "../../public/dota2proencounters.png";
+import pcbuilder from "../../public/pcbuilder.png";
+import dracingpro from "../../public/dracingpro.png";
 
 interface Project {
   title: string;
@@ -34,6 +36,26 @@ const projects: Project[] = [
     description:
       "Consume la API de Dota 2 para detectar si alguna vez jugaste contra un jugador profesional.",
     technologies: ["Node TS", "React TS", "PostgreSQL"],
+  },
+  {
+    title: "PC Builder",
+    image: pcbuilder as ImageMetadata,
+    link: "https://github.com/FranciscoDastres/pc_builder_proyect",
+    preview: "https://pc-builder-proyect.vercel.app",
+    status: "Demo MVP funcional",
+    description:
+      "Aplicación para armar una PC virtual: catálogo de componentes, validación de compatibilidad y resumen de build con precios y stock.",
+    technologies: ["React TS", "Vite", "Tailwind CSS"],
+  },
+  {
+    title: "D Racing Pro",
+    image: dracingpro as ImageMetadata,
+    link: "https://github.com/FranciscoDastres/DRacingPro",
+    preview: "https://d-racing-pro-frontend.vercel.app",
+    status: "En desarrollo",
+    description:
+      "Plataforma de gestión de citas para un taller especializado en Honda NAVI, con autenticación Google OAuth y panel de administración.",
+    technologies: ["React TS", "NestJS", "PostgreSQL", "Docker"],
   },
   {
     title: "Svgl.app",
