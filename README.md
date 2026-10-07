@@ -2,6 +2,14 @@
 
 Portafolio personal construido con Astro, TypeScript y Tailwind CSS, con integración de React disponible y animaciones GSAP/ScrollTrigger. El diseño presenta proyectos reales, experiencia, playlist de Spotify y contacto.
 
+## Emblema
+
+El icono es un escudo original azul con borde metálico y estrella de cuatro puntas. Su fuente vectorial está en `public/brand/portfolio-shield.svg`. Las versiones SVG, PNG, ICO y el icono de acceso directo se regeneran con:
+
+```bash
+node scripts/build-icons.mjs
+```
+
 ## Desarrollo
 
 ```bash
