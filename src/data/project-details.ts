@@ -1,16 +1,16 @@
 export const projectDetails = [
   {
-    category: "E-commerce & gestión",
-    heading: "Una tienda que conecta creatividad y operación.",
+    category: "Servicios & operaciones",
+    heading: "La atención de un taller, conectada.",
     story:
-      "Black Michi Estudio reúne la experiencia de compra y la administración de una tienda en una aplicación. El proyecto contempla inventario, carrito y accesos diferenciados para clientes y administradores, con integración de Google.",
+      "Taller Mono Pistón es una plataforma de gestión de citas para un taller especializado en Honda NAVI. Combina una presentación pública del servicio con autenticación mediante Google y un panel de administración para organizar su operación.",
     features: [
-      "Catálogo e inventario de productos",
-      "Carrito y recorrido de compra",
-      "Roles de cliente y administrador",
+      "Presentación de servicios del taller",
+      "Gestión de citas",
+      "Autenticación Google y panel administrativo",
     ],
     focus:
-      "Experiencia de compra, gestión de datos e integración de servicios.",
+      "Identidad visual, flujos de atención y conexión entre cliente y administración.",
   },
   {
     category: "Gaming & datos",
@@ -26,6 +26,19 @@ export const projectDetails = [
       "Consumo de APIs, tratamiento de información y presentación de resultados.",
   },
   {
+    category: "E-commerce & gestión",
+    heading: "Una tienda que conecta creatividad y operación.",
+    story:
+      "Black Michi Estudio reúne la experiencia de compra y la administración de una tienda en una aplicación. El proyecto contempla inventario, carrito y accesos diferenciados para clientes y administradores, con integración de Google.",
+    features: [
+      "Catálogo e inventario de productos",
+      "Carrito y recorrido de compra",
+      "Roles de cliente y administrador",
+    ],
+    focus:
+      "Experiencia de compra, gestión de datos e integración de servicios.",
+  },
+  {
     category: "Producto & herramientas",
     heading: "Elegir componentes puede ser una buena experiencia.",
     story:
@@ -37,18 +50,5 @@ export const projectDetails = [
     ],
     focus:
       "Interfaces interactivas, reglas de compatibilidad y claridad de información.",
-  },
-  {
-    category: "Servicios & operaciones",
-    heading: "La atención de un taller, conectada.",
-    story:
-      "Taller Mono Pistón es una plataforma de gestión de citas para un taller especializado en Honda NAVI. Combina una presentación pública del servicio con autenticación mediante Google y un panel de administración para organizar su operación.",
-    features: [
-      "Presentación de servicios del taller",
-      "Gestión de citas",
-      "Autenticación Google y panel administrativo",
-    ],
-    focus:
-      "Identidad visual, flujos de atención y conexión entre cliente y administración.",
   },
 ];

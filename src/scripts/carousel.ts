@@ -13,40 +13,40 @@ const slides = Array.from(
 const play = root.querySelector<HTMLButtonElement>(".carousel-play")!;
 const announcement = root.querySelector<HTMLElement>(".carousel-announcement")!;
 const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+function pausedMotion() {
+  return reduced.matches || document.body.classList.contains("motion-paused");
+}
+// Layout must be horizontal before Embla measures slide positions.
 root.classList.add("carousel-enhanced");
 controls.hidden = false;
 const carousel = EmblaCarousel(viewport, {
   loop: true,
-  duration: reduced.matches ? 0 : 30,
+  duration: pausedMotion() ? 0 : 22,
 });
-let playing = false,
-  hovered = false,
-  visible = false;
+let playing = true,
+  visible = false,
+  dragging = false,
+  keyboardFocused = false,
+  lastPaused = pausedMotion();
 let timer: ReturnType<typeof setTimeout> | undefined;
-function pausedMotion() {
-  return reduced.matches || document.body.classList.contains("motion-paused");
-}
-function stop() {
-  playing = false;
-  schedule();
-}
 function schedule() {
   clearTimeout(timer);
-  play.setAttribute("aria-pressed", String(playing));
+  const enabled = playing && !pausedMotion();
+  play.setAttribute("aria-pressed", String(enabled));
   play.setAttribute(
     "aria-label",
-    playing
+    enabled
       ? "Pausar cambio automático de proyectos"
       : "Activar cambio automático de proyectos",
   );
-  play.textContent = playing ? "Ⅱ" : "▷";
+  play.textContent = enabled ? "Ⅱ" : "▷";
   play.disabled = pausedMotion();
   if (
-    playing &&
-    !hovered &&
+    enabled &&
     visible &&
+    !dragging &&
+    !keyboardFocused &&
     !document.hidden &&
-    !pausedMotion() &&
     !document.body.classList.contains("menu-is-open")
   )
     timer = setTimeout(() => carousel.scrollNext(), 6500);
@@ -77,47 +77,64 @@ function update(announce = false) {
     );
   schedule();
 }
+function navigate(action: () => void) {
+  clearTimeout(timer);
+  action();
+  schedule();
+}
 thumbs.forEach((button, i) =>
-  button.addEventListener("click", () => {
-    stop();
-    carousel.scrollTo(i, pausedMotion());
-  }),
+  button.addEventListener("click", () =>
+    navigate(() => carousel.scrollTo(i, pausedMotion())),
+  ),
 );
-root.querySelector(".slide-prev")?.addEventListener("click", () => {
-  stop();
-  carousel.scrollPrev(pausedMotion());
-});
-root.querySelector(".slide-next")?.addEventListener("click", () => {
-  stop();
-  carousel.scrollNext(pausedMotion());
-});
+root
+  .querySelector(".slide-prev")
+  ?.addEventListener("click", () =>
+    navigate(() => carousel.scrollPrev(pausedMotion())),
+  );
+root
+  .querySelector(".slide-next")
+  ?.addEventListener("click", () =>
+    navigate(() => carousel.scrollNext(pausedMotion())),
+  );
 play.addEventListener("click", () => {
   playing = !playing;
+  keyboardFocused = false;
   schedule();
 });
 root.addEventListener("keydown", (event) => {
   if ((event.target as HTMLElement).closest("a")) return;
   if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
     event.preventDefault();
-    stop();
-    event.key === "ArrowLeft"
-      ? carousel.scrollPrev(pausedMotion())
-      : carousel.scrollNext(pausedMotion());
+    keyboardFocused = true;
+    navigate(() =>
+      event.key === "ArrowLeft"
+        ? carousel.scrollPrev(pausedMotion())
+        : carousel.scrollNext(pausedMotion()),
+    );
   }
 });
-root.addEventListener("pointerenter", () => {
-  hovered = true;
-  schedule();
-});
-root.addEventListener("pointerleave", () => {
-  hovered = false;
-  schedule();
-});
 root.addEventListener("focusin", (event) => {
-  if (event.target !== play) stop();
+  keyboardFocused =
+    event.target !== play &&
+    (event.target as HTMLElement).matches(":focus-visible");
+  schedule();
 });
-carousel.on("select", () => update(!playing));
-carousel.on("pointerDown", stop);
+root.addEventListener("focusout", (event) => {
+  if (!root.contains(event.relatedTarget as Node)) {
+    keyboardFocused = false;
+    schedule();
+  }
+});
+carousel.on("select", () => update(keyboardFocused || dragging || !playing));
+carousel.on("pointerDown", () => {
+  dragging = true;
+  schedule();
+});
+carousel.on("pointerUp", () => {
+  dragging = false;
+  schedule();
+});
 carousel.on("reInit", () => update());
 new IntersectionObserver(
   ([entry]) => {
@@ -127,13 +144,18 @@ new IntersectionObserver(
   { threshold: 0.15 },
 ).observe(root);
 new MutationObserver(() => {
-  if (pausedMotion()) playing = false;
+  const paused = pausedMotion();
+  if (paused !== lastPaused) {
+    lastPaused = paused;
+    carousel.reInit({ duration: paused ? 0 : 22 });
+  }
   schedule();
 }).observe(document.body, { attributes: true, attributeFilter: ["class"] });
 document.addEventListener("visibilitychange", schedule);
 reduced.addEventListener("change", () => {
-  stop();
-  carousel.reInit({ duration: reduced.matches ? 0 : 30 });
+  lastPaused = pausedMotion();
+  carousel.reInit({ duration: lastPaused ? 0 : 22 });
+  schedule();
 });
 window.addEventListener("pagehide", () => clearTimeout(timer));
 window.addEventListener("pageshow", schedule);

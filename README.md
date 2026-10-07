@@ -23,7 +23,7 @@ El build ejecuta `astro check` y genera el sitio estático en `dist/`.
 - `src/data/projects.ts`: proyectos, capturas, tecnologías y enlaces.
 - `src/components/home.astro`: portada inmersiva con arte original y presentación personal.
 - `src/components/nav.astro`: menú de pantalla completa con diálogo nativo, teclado y foco.
-- `src/components/projects.astro` y `src/scripts/carousel.ts`: carrusel Embla con miniaturas, arrastre, navegación por teclado y detalles de cada proyecto. El avance automático se activa de forma explícita y se detiene al interactuar.
+- `src/components/projects.astro` y `src/scripts/carousel.ts`: carrusel Embla con miniaturas, arrastre, navegación por teclado y detalles de cada proyecto. El avance automático comienza al entrar en la sección. Las flechas, miniaturas y el arrastre reinician el intervalo; se puede pausar y respeta movimiento reducido.
 - `src/components/stack.astro`: fichas de tecnologías con selección por cursor, teclado y toque.
 - `src/components/about.astro`: experiencia y presentación personal.
 - `src/scripts/motion.ts`: entrada de portada, movimiento del fondo, parallax y pausa de animaciones. Respeta movimiento reducido y guarda la preferencia de pausa.
