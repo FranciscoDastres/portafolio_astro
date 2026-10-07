@@ -1,84 +1,36 @@
 ---
-import "@fontsource-variable/montserrat";
-
+import "@fontsource-variable/manrope";
+import "../styles/global.css";
 interface Props {
   title: string;
 }
-
 const { title } = Astro.props;
+const description =
+  "Soy Francisco Meza Dastres, ingeniero informático en Santiago de Chile. Desarrollo experiencias web con React, TypeScript y Node.js.";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Software Developer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#16141c" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <meta property="og:title" content="Francisco Meza Dastres" />
-    <meta property="og:description" content="Software Developer" />
+    <link rel="canonical" href="https://portafolio-astro-psi.vercel.app/" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
     <meta
       property="og:url"
       content="https://portafolio-astro-psi.vercel.app/"
     />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Francisco Meza Dastres Portfolio" />
-
+    <meta property="og:locale" content="es_CL" />
+    <meta
+      property="og:image"
+      content="https://portafolio-astro-psi.vercel.app/blackmichiestudio.png"
+    />
     <title>{title}</title>
   </head>
-  <body class="bg-[--background] sm:px-28 lg:px-20 px-9">
-    <slot />
-  </body>
+  <body><a class="skip-link" href="#main">Saltar al contenido</a><slot /></body>
 </html>
-
-<style is:global>
-  :root {
-    --background: #101010;
-    --sec: #a476ff;
-    --white: #dfdfdf;
-    --white-icon: #f3f3f398;
-    --white-icon-tr: #f3f3f310;
-  }
-
-  * {
-    font-family:
-      "Montserrat Variable",
-      -apple-system,
-      system-ui,
-      sans-serif;
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-  }
-
-  *::selection {
-    background-color: var(--sec);
-    color: var(--background);
-  }
-
-  /* Scrollbar styles */
-
-  ::-webkit-scrollbar {
-    width: 15px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: var(--container);
-    border-radius: 30px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: var(--background);
-    border-radius: 10px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--pink);
-  }
-
-  /* Scrollbar styles for Firefox */
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: var(--line) var(--container);
-  }
-</style>

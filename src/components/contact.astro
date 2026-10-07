@@ -1,93 +1,74 @@
-<section id="contact" class="w-full py-12 border-t border-[#ffffff10]">
-  <div class="max-w-5xl mx-auto">
-    <h2 class="text-lg text-[var(--sec)] mb-2 shiny-sec">Hablemos</h2>
-    <h3 class="text-4xl md:text-5xl font-medium text-[var(--white)] mb-6">
-      Contacto
-    </h3>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div class="text-[var(--white-icon)]">
-        <p class="mb-4">
-          Tienes alguna pregunta o un proyecto en mente? te responderé lo mas
-          pronto que vea el correo.
-        </p>
-        <div class="flex items-center gap-2">
-          <span>Ubicación:</span>
-          <span class="text-[var(--white)]">Chile, Santiago</span>
-        </div>
-      </div>
-
-      <div>
-        <form
-          id="contact-form"
-          action="https://formspree.io/f/xbdawoow"
-          method="POST"
-          class="flex flex-col gap-4"
-        >
-          <input
-            type="text"
-            name="from_name"
-            placeholder="Nombre"
-            required
-            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]"
-          />
-          <input
-            type="email"
-            name="reply_to"
-            placeholder="Email"
-            required
-            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]"
-          />
-          <textarea
-            name="message"
-            placeholder="Mensaje"
-            rows="6"
-            required
-            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)] resize-none"
-          ></textarea>
-          <button
-            type="submit"
-            class="px-4 py-2 bg-[var(--white-icon-tr)] text-[var(--white)] rounded-lg opacity-60 transition-opacity border border-[var(--white-icon-tr)] hover:opacity-100 hover:bg-[var(--white-icon-tr)]"
-          >
-            Enviar
-          </button>
-        </form>
-        <div
-          id="form-message"
-          class="hidden justify-center items-center mt-4 text-[var(--white)] text-lg"
-        >
-          ✅ Gracias por tu mensaje, te responderé lo antes posible.
-        </div>
-      </div>
-    </div>
+<section id="contact" class="contact-section wrap">
+  <div class="contact-grid">
+    <div>
+      <span class="section-label">La próxima idea puede ser la tuya</span><h2>
+        Construyamos<br />algo bueno.
+      </h2><p>
+        ¿Un proyecto en mente, una oportunidad o simplemente un hola? Me
+        encantará leerte.
+      </p><a
+        class="email-link"
+        href="mailto:francisco.meza.amazon.dev@gmail.com"
+        >francisco.meza.amazon.dev@gmail.com <span aria-hidden="true">↗</span
+        ></a>
+    </div><form
+      id="contact-form"
+      action="https://formspree.io/f/xbdawoow"
+      method="POST"
+    >
+      <label for="name">Tu nombre</label><input
+        id="name"
+        name="from_name"
+        autocomplete="name"
+        placeholder="¿Cómo te llamas?"
+        required
+        maxlength="120"
+      /><label for="email">Tu correo</label><input
+        id="email"
+        type="email"
+        name="reply_to"
+        autocomplete="email"
+        placeholder="hola@ejemplo.com"
+        required
+      /><label for="message">Cuéntame tu idea</label><textarea
+        id="message"
+        name="message"
+        rows="3"
+        placeholder="Me gustaría construir..."
+        required
+        maxlength="5000"></textarea><button
+        class="button button-light"
+        type="submit">Enviar mensaje <span aria-hidden="true">↗</span></button
+      ><p id="form-message" role="status" aria-live="polite"></p>
+    </form>
   </div>
 </section>
-
-<script type="module" is:inline>
-  const form = document.getElementById("contact-form");
-  const formMessage = document.getElementById("form-message");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const formData = new FormData(form);
-
+<script>
+  const form = document.querySelector<HTMLFormElement>("#contact-form");
+  const message = document.querySelector<HTMLParagraphElement>("#form-message");
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const button = form.querySelector<HTMLButtonElement>("button");
+    if (!button || !message) return;
+    button.disabled = true;
+    button.textContent = "Enviando…";
+    message.textContent = "";
     try {
       const response = await fetch(form.action, {
         method: "POST",
-        body: formData,
+        body: new FormData(form),
         headers: { Accept: "application/json" },
       });
-      if (response.ok) {
-        form.reset();
-        form.style.display = "none";
-        formMessage.classList.remove("hidden");
-      } else {
-        const data = await response.json();
-        console.error("Error response:", data);
-        alert("There was a problem sending your message.");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("There was a problem sending your message.");
+      if (!response.ok) throw new Error("send");
+      form.reset();
+      message.textContent =
+        "Gracias por escribirme. Te responderé lo antes posible.";
+    } catch {
+      message.textContent =
+        "No se pudo enviar. Inténtalo otra vez o escríbeme directamente al correo.";
+    } finally {
+      button.disabled = false;
+      button.textContent = "Enviar mensaje ↗";
     }
   });
 </script>

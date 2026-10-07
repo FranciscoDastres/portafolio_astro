@@ -1,60 +1,40 @@
-# Portfolio
+# Francisco Meza Dastres · Portafolio
 
-## **Stack**  
-### **Frontend**  
-![Astro](https://img.shields.io/badge/Astro-FF5D01?logo=astro&logoColor=white)
-![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+Portafolio personal construido con Astro, TypeScript y Tailwind CSS, con integración de React disponible. El diseño presenta proyectos reales, experiencia, playlist de Spotify y contacto.
 
-### **Show your favorite Spotify album (or your own)** ![Spotify](https://img.shields.io/badge/Spotify-06cc1a?logo=spotify&logoColor=white)
-1. Choose your Spotify album
-2. Access the share options
-3. Select 'copy embed code'
-```
-<iframe src="https://open.spotify.com/embed/album/YOUR_ALBUM_ID_HERE" style="border-radius:12px border:0;" class="w-full h-40" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-```
-4. Insert the embed code on footer.astro
+## Desarrollo
 
-That's it!
-
-## **Project structure**
-```
-public/
-└── svg/
-src/
-├── Components/
-|    ├── contact.astro
-|    ├── footer.astro
-|    ├── home.astro
-|    ├── logoWall.astro
-|    ├── nav.astro
-|    └── projects.astro
-├── layouts/
-|    └── Layout.astro
-├── React/
-|    ├── LetterGlitch.tsx
-|    ├── LikeButton.tsx
-|    └── SkillsList.tsx
-└── pages/
-     └── index.astro
-```
-
-## **Local configuration** 
-1. Clone the repo:  
-```
-git clone https://github.com/FranciscoDastres/portafolio_astro
-```
-2. Install dependencies:
-```  
-npm install
-```
-3. Start the development server:
-```  
+```bash
+npm ci
 npm run dev
 ```
 
+## Verificación y compilación
+
+```bash
+npm run build
+npm run preview
+```
+
+El build ejecuta `astro check` y genera el sitio estático en `dist/`.
+
+## Contenido
+
+- `src/data/projects.ts`: proyectos, capturas, tecnologías y enlaces.
+- `src/components/home.astro`: presentación y composición de proyectos.
+- `src/components/about.astro`: experiencia y tecnologías principales.
+- `src/components/music.astro`: playlist de Spotify.
+- `src/components/contact.astro`: formulario Formspree y correo directo.
+- `src/styles/global.css`: colores, tipografía, composición y estilos responsive.
+- `src/layouts/Layout.astro`: metadatos, idioma y estructura del documento.
+
+El formulario conserva el endpoint Formspree existente. Sus estados de éxito y error se verifican localmente con respuestas simuladas, sin enviar mensajes reales.
+
+## Despliegue
+
+El repositorio está integrado con Vercel. Los cambios enviados a `main` activan el despliegue de producción. Usar `npm run build` como comando de compilación y `dist` como directorio de salida.
+
 > **Important Notice:**  
 > This project is licensed under the [MIT License](https://opensource.org/licenses/mit).  
-> According to the license terms, any redistribution (including compiled or modified versions), you **must** retain the original copyright 
+> According to the license terms, any redistribution (including compiled or modified versions), you **must** retain the original copyright
 > notice and the full license text. Copyright © 2025 Francisco Meza Dastres. All rights reserved.
-asdas

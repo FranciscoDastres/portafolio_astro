@@ -11,3 +11,8 @@ node_modules/
 !.env.example
 # Astro generated cache
 .astro/
+
+# Local browser verification and Vercel metadata
+.playwright-cli/
+output/
+.vercel/
