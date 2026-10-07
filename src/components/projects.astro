@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import { projects } from "../data/projects";
 ---
 
-<section id="projects" class="work light-section">
+<section id="projects" class="work graphite-section">
   <div class="wrap">
     <div class="section-heading">
       <h2>Trabajo seleccionado<span class="muted">.</span></h2><p>
@@ -14,7 +14,7 @@ import { projects } from "../data/projects";
     <div class="project-grid">
       {
         projects.map((project, i) => (
-          <article class={`project project-${i}`}>
+          <article id={`project-${i}`} class={`project project-${i}`}>
             <a
               class="project-image"
               href={project.preview}

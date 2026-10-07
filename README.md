@@ -1,6 +1,6 @@
 # Francisco Meza Dastres · Portafolio
 
-Portafolio personal construido con Astro, TypeScript y Tailwind CSS, con integración de React disponible. El diseño presenta proyectos reales, experiencia, playlist de Spotify y contacto.
+Portafolio personal construido con Astro, TypeScript y Tailwind CSS, con integración de React disponible y animaciones GSAP/ScrollTrigger. El diseño presenta proyectos reales, experiencia, playlist de Spotify y contacto.
 
 ## Desarrollo
 
@@ -23,6 +23,8 @@ El build ejecuta `astro check` y genera el sitio estático en `dist/`.
 - `src/data/projects.ts`: proyectos, capturas, tecnologías y enlaces.
 - `src/components/home.astro`: presentación y composición de proyectos.
 - `src/components/about.astro`: experiencia y tecnologías principales.
+- `src/scripts/motion.ts`: entrada de portada, flotación, parallax, interacción con cursor y pausa de animaciones. Respeta movimiento reducido y guarda la preferencia de pausa.
+- `src/components/process.astro`: proceso de trabajo desplegable.
 - `src/components/music.astro`: playlist de Spotify.
 - `src/components/contact.astro`: formulario Formspree y correo directo.
 - `src/styles/global.css`: colores, tipografía, composición y estilos responsive.
