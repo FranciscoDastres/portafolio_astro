@@ -56,9 +56,11 @@ function update(announce = false) {
   thumbs.forEach((button, i) =>
     button.setAttribute("aria-current", String(i === index)),
   );
-  slides.forEach((slide, i) =>
-    slide.setAttribute("aria-hidden", String(i !== index)),
-  );
+  slides.forEach((slide, i) => {
+    slide.setAttribute("aria-hidden", String(i !== index));
+    const link = slide.querySelector<HTMLAnchorElement>(".project-visual");
+    if (link) link.tabIndex = i === index ? 0 : -1;
+  });
   panels.forEach((panel, i) => (panel.hidden = i !== index));
   if (announce)
     announcement.textContent = slides[index].getAttribute("aria-label")!;
