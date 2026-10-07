@@ -71,7 +71,7 @@ function startMotion() {
         yoyo: true,
         repeat: -1,
       });
-      const logo = gsap.to(".stack-orbit > img", {
+      const logo = gsap.to(".stack-orbit img", {
         y: -9,
         rotation: 3,
         duration: 3.8,

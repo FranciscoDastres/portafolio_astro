@@ -10,6 +10,10 @@ const panels = Array.from(root.querySelectorAll<HTMLElement>("[data-panel]"));
 const slides = Array.from(
   root.querySelectorAll<HTMLElement>(".carousel-slide"),
 );
+const screens = slides.map(
+  (slide) => slide.querySelector<HTMLElement>(".project-screen")!,
+);
+let activeIndex = -1;
 const play = root.querySelector<HTMLButtonElement>(".carousel-play")!;
 const announcement = root.querySelector<HTMLElement>(".carousel-announcement")!;
 const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -51,8 +55,17 @@ function schedule() {
   )
     timer = setTimeout(() => carousel.scrollNext(), 6500);
 }
-function update(announce = false) {
+function resetTransition() {
+  gsap.killTweensOf([...panels, ...screens]);
+  gsap.set([...panels, ...screens], {
+    clearProps: "opacity,visibility,transform",
+  });
+}
+function update(announce = false, animate = false) {
   const index = carousel.selectedScrollSnap();
+  const changed = index !== activeIndex;
+  activeIndex = index;
+  if (changed) resetTransition();
   thumbs.forEach((button, i) =>
     button.setAttribute("aria-current", String(i === index)),
   );
@@ -64,7 +77,7 @@ function update(announce = false) {
   panels.forEach((panel, i) => (panel.hidden = i !== index));
   if (announce)
     announcement.textContent = slides[index].getAttribute("aria-label")!;
-  if (!pausedMotion() && announce)
+  if (changed && animate && !pausedMotion()) {
     gsap.fromTo(
       panels[index],
       { opacity: 0.2, y: 12 },
@@ -77,6 +90,19 @@ function update(announce = false) {
         overwrite: true,
       },
     );
+    gsap.fromTo(
+      screens[index],
+      { scale: 0.97, opacity: 0.6 },
+      {
+        scale: 1,
+        opacity: 1,
+        duration: 0.55,
+        ease: "power2.out",
+        clearProps: "opacity,transform",
+        overwrite: true,
+      },
+    );
+  }
   schedule();
 }
 function navigate(action: () => void) {
@@ -128,7 +154,9 @@ root.addEventListener("focusout", (event) => {
     schedule();
   }
 });
-carousel.on("select", () => update(keyboardFocused || dragging || !playing));
+carousel.on("select", () =>
+  update(keyboardFocused || dragging || !playing, true),
+);
 carousel.on("pointerDown", () => {
   dragging = true;
   schedule();
@@ -149,6 +177,7 @@ new MutationObserver(() => {
   const paused = pausedMotion();
   if (paused !== lastPaused) {
     lastPaused = paused;
+    if (paused) resetTransition();
     carousel.reInit({ duration: paused ? 0 : 22 });
   }
   schedule();
@@ -156,6 +185,7 @@ new MutationObserver(() => {
 document.addEventListener("visibilitychange", schedule);
 reduced.addEventListener("change", () => {
   lastPaused = pausedMotion();
+  if (lastPaused) resetTransition();
   carousel.reInit({ duration: lastPaused ? 0 : 22 });
   schedule();
 });

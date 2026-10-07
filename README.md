@@ -25,7 +25,7 @@ El build ejecuta `astro check` y genera el sitio estático en `dist/`.
 - `src/components/nav.astro`: menú de pantalla completa con diálogo nativo, teclado y foco.
 - `src/components/projects.astro` y `src/scripts/carousel.ts`: carrusel Embla con miniaturas, arrastre, navegación por teclado y detalles de cada proyecto. El avance automático comienza al entrar en la sección. Las flechas, miniaturas y el arrastre reinician el intervalo; se puede pausar y respeta movimiento reducido.
 - `src/components/projectList.astro`: proyectos presentados uno por uno, con imagen, descripción, tecnologías y enlace al sitio publicado.
-- `src/components/stack.astro`: fichas de tecnologías con selección por cursor, teclado y toque.
+- `src/components/stack.astro`: fichas de tecnologías con transiciones, selección por cursor y teclado, y enlaces a la documentación oficial en otra pestaña.
 - `src/components/about.astro`: experiencia y presentación personal.
 - `src/scripts/motion.ts`: entrada de portada, movimiento del fondo, parallax y pausa de animaciones. Respeta movimiento reducido y guarda la preferencia de pausa.
 - `src/components/music.astro`: playlist de Spotify.
@@ -34,6 +34,12 @@ El build ejecuta `astro check` y genera el sitio estático en `dist/`.
 - `src/layouts/Layout.astro`: metadatos, idioma y estructura del documento.
 
 El formulario conserva el endpoint Formspree existente. Sus estados de éxito y error se verifican localmente con respuestas simuladas, sin enviar mensajes reales.
+
+## Bandeja del formulario
+
+El formulario envía a Formspree, ID `xbdawoow`. Los mensajes se consultan en Formspree → formulario → **Submissions**. El destinatario se configura en **Workflow → Email → Settings** (o **Settings → Target Email** en formularios antiguos) y no está definido en este repositorio. El enlace de correo directo utiliza `francisco.meza.amazon.dev@gmail.com`; eso no confirma el destinatario configurado en Formspree.
+
+[Guía oficial de Formspree](https://help.formspree.io/articles/form-and-project-settings/changing-a-form-email-address).
 
 ## Despliegue
 

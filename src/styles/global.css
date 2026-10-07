@@ -728,7 +728,7 @@ h2 {
   background: radial-gradient(ellipse at center, #c6b2ef0c, transparent 60%);
   overflow: hidden;
 }
-.stack-orbit > img {
+.stack-orbit img {
   z-index: 1;
   object-fit: contain;
   filter: drop-shadow(0 12px 25px #0005);
@@ -815,13 +815,13 @@ h2 {
   pointer-events: none;
 }
 .stack-card:hover,
-.stack-card[aria-pressed="true"] {
+.stack-card[data-selected="true"] {
   border-color: #c6b2ef70;
   background: #34303d;
   transform: translateY(-3px);
 }
 .stack-card:hover:before,
-.stack-card[aria-pressed="true"]:before {
+.stack-card[data-selected="true"]:before {
   opacity: 0.12;
 }
 .stack-card > img {
@@ -1247,7 +1247,7 @@ form .button {
     width: 180px;
     height: 180px;
   }
-  .stack-orbit > img {
+  .stack-orbit img {
     width: 70px;
     height: 70px;
   }
@@ -1583,5 +1583,19 @@ html {
     opacity: 1;
     transform: none;
     font-size: 12px;
+  }
+}
+
+#stack-feature-docs {
+  display: grid;
+  place-items: center;
+  z-index: 1;
+}
+#stack-feature-docs:hover img {
+  filter: drop-shadow(0 0 22px #c6b2ef50);
+}
+@media (max-width: 380px) {
+  .hero-bottom-bar {
+    bottom: 62px;
   }
 }

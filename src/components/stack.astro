@@ -2,6 +2,7 @@
 const skills = [
   {
     name: "TypeScript",
+    documentation: "https://www.typescriptlang.org/docs/",
     icon: "typeScript",
     category: "Lenguaje",
     description:
@@ -10,6 +11,7 @@ const skills = [
   },
   {
     name: "React",
+    documentation: "https://react.dev/learn",
     icon: "react",
     category: "Frontend",
     description:
@@ -18,6 +20,8 @@ const skills = [
   },
   {
     name: "Node.js",
+    documentation:
+      "https://nodejs.org/en/learn/getting-started/introduction-to-nodejs",
     icon: "nodejs",
     category: "Backend",
     description:
@@ -26,6 +30,7 @@ const skills = [
   },
   {
     name: "PostgreSQL",
+    documentation: "https://www.postgresql.org/docs/current/",
     icon: "postgreSQL",
     category: "Datos",
     description:
@@ -34,6 +39,7 @@ const skills = [
   },
   {
     name: "AWS",
+    documentation: "https://docs.aws.amazon.com/",
     icon: "aws",
     category: "Cloud",
     description:
@@ -42,6 +48,7 @@ const skills = [
   },
   {
     name: "Docker",
+    documentation: "https://docs.docker.com/",
     icon: "docker",
     category: "Infraestructura",
     description:
@@ -50,6 +57,7 @@ const skills = [
   },
   {
     name: "Tailwind CSS",
+    documentation: "https://tailwindcss.com/docs/",
     icon: "tailwindcss",
     category: "Diseño de interfaces",
     description:
@@ -58,6 +66,7 @@ const skills = [
   },
   {
     name: "Astro",
+    documentation: "https://docs.astro.build/en/getting-started/",
     icon: "astro",
     category: "Experiencias web",
     description:
@@ -66,6 +75,7 @@ const skills = [
   },
   {
     name: "Git",
+    documentation: "https://git-scm.com/docs",
     icon: "git",
     category: "Colaboración",
     description:
@@ -87,15 +97,25 @@ const skills = [
       </p>
     </div><div class="stack-layout">
       <div class="stack-feature">
-        <div class="stack-orbit" aria-hidden="true">
-          <div class="stack-ring"></div><div class="stack-ring ring-offset">
-          </div><img
-            id="stack-feature-icon"
-            src="/svg/typeScript.svg"
-            alt=""
-            width="90"
-            height="90"
-          /><span class="orbit-point"></span>
+        <div class="stack-orbit">
+          <div class="stack-ring" aria-hidden="true"></div><div
+            class="stack-ring ring-offset"
+            aria-hidden="true"
+          >
+          </div><a
+            id="stack-feature-docs"
+            href={skills[0].documentation}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Documentación oficial de TypeScript (abre en otra pestaña)"
+            ><img
+              id="stack-feature-icon"
+              src="/svg/typeScript.svg"
+              alt=""
+              width="90"
+              height="90"
+            /></a
+          ><span class="orbit-point" aria-hidden="true"></span>
         </div><div class="stack-feature-copy">
           <span id="stack-feature-category">Lenguaje</span><h3
             id="stack-feature-name"
@@ -113,15 +133,19 @@ const skills = [
             type="button"
             class="circle-button"
             id="stack-next"
-            aria-label="Tecnología siguiente">→</button>
+            aria-label="Tecnología siguiente">→</button
+          >
         </div>
       </div><div class="stack-grid" aria-label="Explorar tecnologías">
         {
           skills.map((skill, i) => (
-            <button
+            <a
               class="stack-card"
-              type="button"
-              aria-pressed={i === 0 ? "true" : "false"}
+              href={skill.documentation}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Documentación oficial de ${skill.name} (abre en otra pestaña)`}
+              data-selected={i === 0 ? "true" : "false"}
               aria-controls="stack-feature-name stack-feature-description"
               data-name={skill.name}
               data-icon={skill.icon}
@@ -143,7 +167,7 @@ const skills = [
                   ↗
                 </span>
               </>
-            </button>
+            </a>
           ))
         }
       </div>
@@ -151,49 +175,5 @@ const skills = [
   </div>
 </section>
 <script>
-  const cards = document.querySelectorAll<HTMLButtonElement>(".stack-card");
-  function select(card: HTMLButtonElement) {
-    const position = document.querySelector("#stack-position");
-    if (position)
-      position.textContent = `${String(Array.from(cards).indexOf(card) + 1).padStart(2, "0")} / 09`;
-    cards.forEach((item) =>
-      item.setAttribute("aria-pressed", String(item === card)),
-    );
-    const icon = document.querySelector<HTMLImageElement>(
-      "#stack-feature-icon",
-    );
-    if (icon) icon.src = `/svg/${card.dataset.icon}.svg`;
-    for (const key of ["name", "category", "description"]) {
-      const target = document.querySelector(`#stack-feature-${key}`);
-      if (target) target.textContent = card.dataset[key] || "";
-    }
-    const feature = document.querySelector<HTMLElement>(".stack-feature");
-    feature?.style.setProperty(
-      "--skill-accent",
-      card.style.getPropertyValue("--skill-accent"),
-    );
-  }
-  const navigation = document.querySelector<HTMLElement>(
-    ".stack-feature-navigation",
-  );
-  if (navigation) navigation.hidden = false;
-  function step(direction: number) {
-    const current = Array.from(cards).findIndex(
-      (card) => card.getAttribute("aria-pressed") === "true",
-    );
-    select(cards[(current + direction + cards.length) % cards.length]);
-  }
-  document
-    .querySelector("#stack-prev")
-    ?.addEventListener("click", () => step(-1));
-  document
-    .querySelector("#stack-next")
-    ?.addEventListener("click", () => step(1));
-  cards.forEach((card) => {
-    card.addEventListener("click", () => select(card));
-    card.addEventListener("focus", () => select(card));
-    card.addEventListener("pointerenter", (event) => {
-      if (event.pointerType === "mouse") select(card);
-    });
-  });
+  import "../scripts/stack";
 </script>
