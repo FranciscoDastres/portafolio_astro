@@ -814,3 +814,15 @@ form .button {
     transition: none !important;
   }
 }
+
+/* Allow content to shrink within grid tracks on narrow phones. */
+.about-grid > *,
+.music-grid > *,
+.contact-grid > * {
+  min-width: 0;
+}
+@media (max-width: 600px) {
+  .contact-grid h2 {
+    font-size: clamp(42px, 12vw, 56px);
+  }
+}
