@@ -1,72 +1,183 @@
 ---
 import { Image } from "astro:assets";
 import { projects } from "../data/projects";
+import { projectDetails } from "../data/project-details";
 ---
 
-<section id="projects" class="work graphite-section">
-  <div class="wrap">
-    <div class="section-heading">
-      <h2>Trabajo seleccionado<span class="muted">.</span></h2><p>
-        Productos reales, retos distintos.<br />Una mirada a lo que he
-        construido.
-      </p>
+<section id="projects" class="work-section" aria-labelledby="projects-title">
+  <div class="wrap section-heading">
+    <div>
+      <span class="section-label">Selección de proyectos</span><h2
+        id="projects-title"
+      >
+        Ideas en acción.
+      </h2>
+    </div><p>
+      Cada producto tiene una historia.<br />Explora la experiencia y lo que hay
+      detrás.
+    </p>
+  </div>
+  <div
+    class="project-showcase wrap"
+    role="region"
+    aria-roledescription="carrusel"
+    aria-label="Proyectos de Francisco"
+    tabindex="0"
+  >
+    <div class="carousel-viewport">
+      <div class="carousel-track">
+        {
+          projects.map((project, i) => (
+            <div
+              class="carousel-slide"
+              role="group"
+              aria-roledescription="diapositiva"
+              aria-label={`${i + 1} de ${projects.length}: ${project.title}`}
+            >
+              <div class="slide-heading">
+                <>
+                  <span>{projectDetails[i].category}</span>
+                  <h3>{project.title}</h3>
+                </>
+              </div>
+              <div class={`project-visual visual-${i}`}>
+                <>
+                  <div class="project-image-backdrop" aria-hidden="true">
+                    <Image
+                      src={project.image}
+                      alt=""
+                      width={800}
+                      loading="lazy"
+                    />
+                  </div>
+                  <div class="project-screen">
+                    <>
+                      <div class="screen-top">
+                        <>
+                          <span class="window-dots" aria-hidden="true">
+                            ● ● ●
+                          </span>
+                          <span>{project.title}</span>
+                          <span aria-hidden="true">↗</span>
+                        </>
+                      </div>
+                      <Image
+                        src={project.image}
+                        alt={`Interfaz de ${project.title}`}
+                        widths={[640, 1024, 1440]}
+                        sizes="(max-width: 600px) 90vw, 85vw"
+                        loading="lazy"
+                      />
+                    </>
+                  </div>
+                </>
+              </div>
+            </div>
+          ))
+        }
+      </div>
     </div>
-    <div class="project-grid">
-      {
-        projects.map((project, i) => (
-          <article id={`project-${i}`} class={`project project-${i}`}>
-            <a
-              class="project-image"
-              href={project.preview}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Abrir demo de ${project.title}`}
+    <div class="carousel-controls" hidden>
+      <button
+        class="slide-prev circle-button"
+        type="button"
+        aria-label="Proyecto anterior">←</button
+      ><div class="carousel-thumbs" aria-label="Seleccionar proyecto">
+        {
+          projects.map((project, i) => (
+            <button
+              type="button"
+              data-slide={i}
+              aria-label={`Ver ${project.title}`}
+              aria-current={i === 0 ? "true" : "false"}
             >
               <>
-                <Image
-                  src={project.image}
-                  alt={`Captura de la aplicación ${project.title}`}
-                  widths={[480, 800, 1200]}
-                  sizes="(max-width: 760px) 90vw, 45vw"
-                  loading="lazy"
-                />
-                <span class="image-action" aria-hidden="true">
-                  ↗
-                </span>
+                <Image src={project.image} alt="" width={180} loading="lazy" />
+                <span>{project.title}</span>
               </>
-            </a>
-            <div class="project-title">
-              <>
-                <h3>{project.title}</h3>
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Ver código de ${project.title}`}
-                >
-                  Código ↗
-                </a>
-              </>
-            </div>
+            </button>
+          ))
+        }
+      </div><button
+        class="slide-next circle-button"
+        type="button"
+        aria-label="Proyecto siguiente">→</button
+      ><button
+        class="carousel-play circle-button"
+        type="button"
+        aria-pressed="false"
+        aria-label="Activar cambio automático de proyectos">▷</button>
+    </div>
+    <p class="carousel-announcement sr-only" role="status" aria-live="polite">
+    </p>
+    <div class="project-information">
+      {
+        projects.map((project, i) => (
+          <article
+            class="project-panel"
+            data-panel={i}
+            aria-labelledby={`project-heading-${i}`}
+          >
             <>
-              <p class="project-description">{project.description}</p>
-              <ul class="tech-tags" aria-label="Tecnologías">
-                {project.technologies.map((tech) => (
-                  <li>{tech}</li>
-                ))}
-              </ul>
-              <p class="project-status">{project.status}</p>
+              <div class="project-intro">
+                <>
+                  <p class="project-status">
+                    <span class="status-dot" />
+                    {project.status}
+                  </p>
+                  <h3 id={`project-heading-${i}`}>
+                    {projectDetails[i].heading}
+                  </h3>
+                  <p>{projectDetails[i].story}</p>
+                  <div class="project-links">
+                    <>
+                      <a
+                        class="button button-light"
+                        href={project.preview}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Explorar demo <span aria-hidden="true">↗</span>
+                      </a>
+                      <a
+                        class="text-link"
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Ver código <span aria-hidden="true">↗</span>
+                      </a>
+                    </>
+                  </div>
+                </>
+              </div>
+              <div class="project-specs">
+                <>
+                  <h4>Dentro del proyecto</h4>
+                  <ul class="feature-list">
+                    {projectDetails[i].features.map((feature) => (
+                      <li>
+                        <span aria-hidden="true">↳</span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <h4>Tecnologías</h4>
+                  <ul class="tech-tags">
+                    {project.technologies.map((tech) => (
+                      <li>{tech}</li>
+                    ))}
+                  </ul>
+                  <p>{projectDetails[i].focus}</p>
+                </>
+              </div>
             </>
           </article>
         ))
       }
     </div>
-    <a
-      class="text-link"
-      href="https://github.com/FranciscoDastres?tab=repositories"
-      target="_blank"
-      rel="noopener noreferrer"
-      >Más código, más ideas en GitHub <span aria-hidden="true">↗</span></a
-    >
   </div>
 </section>
+<script>
+  import "../scripts/carousel";
+</script>

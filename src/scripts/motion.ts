@@ -44,219 +44,98 @@ function startMotion() {
   updateControl();
   document.body.dataset.motion = "paused";
   if (userPaused) return;
-
   media.add(
     {
       motion: "(prefers-reduced-motion: no-preference)",
       desktop: "(min-width: 901px)",
-      finePointer: "(hover: hover) and (pointer: fine)",
       reduced: "(prefers-reduced-motion: reduce)",
     },
     (context) => {
       if (context.conditions?.reduced) return;
-      const desktop = context.conditions?.desktop;
+      document.body.dataset.motion = "active";
       const events = new AbortController();
       const signal = events.signal;
-      document.body.dataset.motion = "active";
-
-      const entrance = gsap.timeline({
-        defaults: { duration: 1, ease: "power3.out" },
-      });
-      entrance
-        .from(".title-line > span", {
-          yPercent: 110,
-          rotation: 2,
-          stagger: 0.12,
-        })
-        .from(".hero-bottom", { y: 18, opacity: 0, duration: 0.7 }, "-=0.65")
+      gsap
+        .timeline({ defaults: { ease: "power3.out", duration: 1.1 } })
+        .from(".title-line > span", { yPercent: 110, stagger: 0.12 })
         .from(
-          ".stage-screen",
-          { y: 80, opacity: 0, stagger: 0.12, duration: 1.3 },
-          "-=0.45",
+          ".hero-role, .hero-description, .hero-content .button",
+          { y: 22, opacity: 0, stagger: 0.09, duration: 0.8 },
+          "-=.65",
         );
-
-      const floaters = gsap.utils
-        .toArray<HTMLElement>(".stage-screen img")
-        .map((image, index) =>
-          gsap.to(image, {
-            y: index % 2 ? -9 : 9,
-            scale: 1.09,
-            duration: 3.5 + index * 0.7,
-            ease: "sine.inOut",
-            repeat: -1,
-            yoyo: true,
-          }),
-        );
-      const rings = gsap.to(".code-orbit", {
-        rotation: 18,
-        y: 15,
-        duration: 7,
+      const cover = gsap.to(".hero-backdrop img", {
+        xPercent: 1.3,
+        scale: 1.08,
+        duration: 9,
         ease: "sine.inOut",
-        repeat: -1,
         yoyo: true,
+        repeat: -1,
       });
-      const ambient = [...floaters, rings];
-      const setAmbient = (visible: boolean) =>
-        ambient.forEach((tween) =>
-          visible && !document.hidden ? tween.resume() : tween.pause(),
-        );
-      const stageVisibility = ScrollTrigger.create({
-        trigger: ".hero",
-        start: "top bottom",
-        end: "bottom top",
-        onToggle: (self) => setAmbient(self.isActive),
+      const logo = gsap.to(".stack-orbit > img", {
+        y: -9,
+        rotation: 3,
+        duration: 3.8,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
       });
-      setAmbient(stageVisibility.isActive);
+      const ambients = [
+        { tween: cover, trigger: ".hero-cover" },
+        { tween: logo, trigger: ".stack-section" },
+      ].map((item) => {
+        const visibility = ScrollTrigger.create({
+          trigger: item.trigger,
+          start: "top bottom",
+          end: "bottom top",
+          onToggle: (self) =>
+            self.isActive && !document.hidden
+              ? item.tween.resume()
+              : item.tween.pause(),
+        });
+        if (!visibility.isActive) item.tween.pause();
+        return { ...item, visibility };
+      });
       document.addEventListener(
         "visibilitychange",
-        () => setAmbient(stageVisibility.isActive),
+        () =>
+          ambients.forEach((item) =>
+            item.visibility.isActive && !document.hidden
+              ? item.tween.resume()
+              : item.tween.pause(),
+          ),
         { signal },
       );
-
-      gsap.utils
-        .toArray<HTMLElement>(".stage-screen")
-        .forEach((screen, index) => {
-          gsap.to(screen, {
-            x: (index - 1) * (desktop ? 45 : 12),
-            rotation: [-16, 2, 16][index],
-            ease: "none",
-            scrollTrigger: {
-              trigger: ".project-stage",
-              start: "top 65%",
-              end: "bottom top",
-              scrub: 1,
-            },
-          });
-        });
-
-      gsap.utils.toArray<HTMLElement>(".project-image").forEach((image) => {
-        gsap.fromTo(
-          image,
-          { clipPath: "inset(12% 0% 12% 0% round 12px)" },
-          {
-            clipPath: "inset(0% 0% 0% 0% round 12px)",
-            ease: "none",
-            scrollTrigger: {
-              trigger: image,
-              start: "top 95%",
-              end: "top 45%",
-              scrub: 0.6,
-            },
-          },
-        );
-      });
-      if (desktop) {
-        gsap.to(".project-1, .project-3", {
-          y: -55,
+      if (context.conditions?.desktop)
+        gsap.to(".hero-backdrop", {
+          yPercent: 18,
           ease: "none",
           scrollTrigger: {
-            trigger: ".project-grid",
-            start: "top bottom",
+            trigger: ".hero-cover",
+            start: "top top",
             end: "bottom top",
             scrub: 1,
           },
         });
-      }
       gsap.utils
         .toArray<HTMLElement>(
-          ".section-heading h2, .process-intro h2, .about h2, .music-copy h2, .contact-grid h2",
+          ".section-heading h2, .about-section h2, .music-copy h2, .contact-grid h2",
         )
-        .forEach((heading) => {
+        .forEach((heading) =>
           gsap.from(heading, {
-            y: 25,
-            opacity: 0.35,
+            y: 22,
+            opacity: 0.4,
             duration: 0.9,
             ease: "power2.out",
-            scrollTrigger: { trigger: heading, start: "top 90%", once: true },
-          });
-        });
-      gsap.from(".skills-row > div", {
-        y: 15,
-        opacity: 0,
+            scrollTrigger: { trigger: heading, start: "top 92%", once: true },
+          }),
+        );
+      gsap.from(".stack-card", {
+        y: 18,
+        opacity: 0.35,
         duration: 0.65,
-        stagger: 0.08,
-        scrollTrigger: { trigger: ".skills-row", start: "top 92%", once: true },
+        stagger: 0.055,
+        scrollTrigger: { trigger: ".stack-grid", start: "top 90%", once: true },
       });
-
-      if (context.conditions?.finePointer) {
-        const stage = document.querySelector<HTMLElement>(".project-stage");
-        if (stage) {
-          const rotateX = gsap.quickTo(stage, "rotationX", {
-            duration: 0.8,
-            ease: "power2.out",
-          });
-          const rotateY = gsap.quickTo(stage, "rotationY", {
-            duration: 0.8,
-            ease: "power2.out",
-          });
-          stage.addEventListener(
-            "pointermove",
-            (event) => {
-              const rect = stage.getBoundingClientRect();
-              const x = (event.clientX - rect.left) / rect.width;
-              const y = (event.clientY - rect.top) / rect.height;
-              rotateX((0.5 - y) * 3);
-              rotateY((x - 0.5) * 3);
-              stage.style.setProperty("--pointer-x", `${x * 100}%`);
-              stage.style.setProperty("--pointer-y", `${y * 100}%`);
-            },
-            { signal },
-          );
-          stage.addEventListener(
-            "pointerleave",
-            () => {
-              rotateX(0);
-              rotateY(0);
-            },
-            { signal },
-          );
-        }
-        gsap.utils.toArray<HTMLElement>(".project-image").forEach((surface) => {
-          const image = surface.querySelector("img");
-          if (!image) return;
-          const xTo = gsap.quickTo(image, "rotationY", {
-            duration: 0.65,
-            ease: "power2.out",
-          });
-          const yTo = gsap.quickTo(image, "rotationX", {
-            duration: 0.65,
-            ease: "power2.out",
-          });
-          const scaleTo = gsap.quickTo(image, "scale", {
-            duration: 0.65,
-            ease: "power2.out",
-          });
-          surface.addEventListener(
-            "pointermove",
-            (event) => {
-              const rect = surface.getBoundingClientRect();
-              const x = (event.clientX - rect.left) / rect.width;
-              const y = (event.clientY - rect.top) / rect.height;
-              xTo((x - 0.5) * 7);
-              yTo((0.5 - y) * 7);
-              scaleTo(1.025);
-              surface.style.setProperty("--pointer-x", `${x * 100}%`);
-              surface.style.setProperty("--pointer-y", `${y * 100}%`);
-            },
-            { signal },
-          );
-          surface.addEventListener(
-            "pointerleave",
-            () => {
-              xTo(0);
-              yTo(0);
-              scaleTo(1);
-            },
-            { signal },
-          );
-        });
-      }
-      // Refresh after self-hosted fonts settle, without keeping stale callbacks after cleanup.
-      document.querySelectorAll(".process-step").forEach((step) =>
-        step.addEventListener("toggle", () => ScrollTrigger.refresh(), {
-          signal,
-        }),
-      );
       document.fonts.ready.then(() => {
         if (!signal.aborted) ScrollTrigger.refresh();
       });

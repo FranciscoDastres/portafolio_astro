@@ -1,50 +1,22 @@
-<section id="about" class="about graphite-section">
-  <div class="wrap about-grid">
-    <div>
-      <span class="section-label">Detrás del código</span><h2>
-        Curioso por naturaleza.<br />Desarrollador por vocación.
-      </h2>
-    </div><div class="about-copy">
-      <p>
-        Soy Francisco, ingeniero informático en Santiago de Chile. Me gusta
-        convertir problemas complejos en experiencias simples, desde la interfaz
-        hasta lo que ocurre detrás de ella.
-      </p><p>
-        Mi experiencia abarca desarrollo full stack con TypeScript y servicios
-        en la nube con AWS. Disfruto construir, aprender en el camino y cuidar
-        esos detalles que hacen que un producto se sienta completo.
-      </p><a
-        class="text-link"
-        href="https://linkedin.com/in/francisco-meza-dastres"
-        target="_blank"
-        rel="noopener noreferrer"
-        >Conoce mi trayectoria <span aria-hidden="true">↗</span></a
-      >
-    </div>
-  </div>
-  <div class="wrap skills-row" aria-label="Tecnologías principales">
-    {
-      [
-        { name: "TypeScript", icon: "typeScript" },
-        { name: "React", icon: "react" },
-        { name: "Node.js", icon: "nodejs" },
-        { name: "PostgreSQL", icon: "postgreSQL" },
-        { name: "AWS", icon: "aws" },
-        { name: "Docker", icon: "docker" },
-      ].map((skill) => (
-        <div>
-          <>
-            <img
-              src={`/svg/${skill.icon}.svg`}
-              alt=""
-              width="28"
-              height="28"
-              loading="lazy"
-            />
-            <span>{skill.name}</span>
-          </>
-        </div>
-      ))
-    }
+<section id="about" class="about-section wrap">
+  <div>
+    <span class="section-label">Sobre mí</span><h2>
+      La curiosidad<br />también construye.
+    </h2>
+  </div><div class="about-copy">
+    <p>
+      Soy Francisco Meza Dastres, Ingeniero Informático y Desarrollador Full
+      Stack en Santiago de Chile. Me interesa lo que une una buena experiencia
+      con una implementación sólida.
+    </p><p>
+      Trabajo con TypeScript, desarrollo de interfaces, APIs y servicios en la
+      nube. Disfruto convertir problemas complejos en productos claros, aprender
+      durante el proceso y cuidar el detalle hasta el final.
+    </p><a
+      class="text-link"
+      href="https://linkedin.com/in/francisco-meza-dastres"
+      target="_blank"
+      rel="noopener noreferrer"
+      >Conoce mi trayectoria <span aria-hidden="true">↗</span></a>
   </div>
 </section>

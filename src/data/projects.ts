@@ -35,7 +35,7 @@ export const projects = [
     technologies: ["React TS", "Vite", "Tailwind CSS"],
   },
   {
-    title: "D Racing Pro",
+    title: "Taller Mono Pistón",
     image: dracingpro,
     link: "https://github.com/FranciscoDastres/DRacingPro",
     preview: "https://d-racing-pro-frontend.vercel.app",

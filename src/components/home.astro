@@ -1,92 +1,41 @@
 ---
 import { Image } from "astro:assets";
-import { projects } from "../data/projects";
+import hero from "../assets/hero-chrome.png";
 ---
 
-<section id="home" class="hero wrap">
-  <div class="hero-top">
-    <p>
-      Francisco Meza Dastres<br /><span
-        >Ingeniero informático & desarrollador full stack</span
-      >
-    </p><p class="location">
-      <span class="status-dot"></span>Santiago, Chile <time id="local-time"
-      ></time>
+<section id="home" class="hero-cover">
+  <div class="hero-backdrop" aria-hidden="true">
+    <Image
+      src={hero}
+      alt=""
+      widths={[768, 1280, 1920]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+    />
+  </div>
+  <div class="hero-vignette" aria-hidden="true"></div>
+  <div class="hero-content wrap">
+    <p class="hero-location"><span class="status-dot"></span>Santiago, Chile</p>
+    <h1>
+      <span class="title-line"><span>Francisco</span></span><span
+        class="title-line"><span>Meza Dastres</span></span>
+    </h1>
+    <p class="hero-role">
+      Ingeniero Informático<br />y Desarrollador Full Stack
     </p>
-  </div>
-  <div class="hero-art" aria-hidden="true">
-    <div class="orb-glow"></div><div class="code-orbit">
-      <span class="orbit-ring ring-one"></span><span class="orbit-ring ring-two"
-      ></span><span class="orbit-ring ring-three"></span><span
-        class="orbit-core">{"{ }"}</span
-      ><span class="orbit-satellite"></span>
-    </div>
-  </div>
-  <h1>
-    <span class="title-line"><span>Ideas que se convierten</span></span><span
-      class="title-line"><span>en experiencias.</span></span
-    >
-  </h1>
-  <div class="hero-bottom">
-    <p>
-      Combino código, curiosidad y atención al detalle para construir productos
-      digitales que funcionan y se sienten bien.
-    </p><a class="button button-light" href="#projects"
-      >Explorar mi trabajo <span aria-hidden="true">↘</span></a
+    <p class="hero-description">
+      Del primer concepto al último detalle.<br />Construyo experiencias
+      digitales con propósito.
+    </p>
+    <a class="button button-outline" href="#projects"
+      >Explorar proyectos <span aria-hidden="true">↗</span></a
     >
   </div>
-  <div class="project-stage" aria-label="Una selección de mis proyectos">
-    {
-      projects.slice(0, 3).map((project, i) => (
-        <a
-          class={`stage-screen screen-${i}`}
-          href={`#project-${i}`}
-          aria-label={`Ver proyecto ${project.title}`}
-        >
-          <>
-            <div class="browser-bar">
-              <>
-                <span />
-                <span />
-                <span />
-                <small>{project.title}</small>
-              </>
-            </div>
-            <Image
-              src={project.image}
-              alt={`Interfaz de ${project.title}`}
-              widths={[480, 800]}
-              sizes="(max-width: 600px) 80vw, 45vw"
-              loading="eager"
-            />
-          </>
-        </a>
-      ))
-    }
-    <div class="stage-caption">
-      <span class="status-dot"></span>Hecho con intención. Construido con
-      código.
-    </div>
-  </div>
-  <div class="hero-foot">
-    <span>Desarrollo web, de la idea al producto.</span><a href="#projects"
-      >Sigue explorando <span aria-hidden="true">↓</span></a
-    >
+  <div class="hero-bottom-bar wrap">
+    <span>React, TypeScript & Node.js</span><a href="#projects"
+      >Desliza para descubrir <span class="scroll-line" aria-hidden="true"
+      ></span></a
+    ><span>Diseño. Desarrollo. Detalle.</span>
   </div>
 </section>
-<script>
-  const clock = document.querySelector<HTMLTimeElement>("#local-time");
-  const updateClock = () => {
-    if (clock) {
-      clock.textContent = new Intl.DateTimeFormat("es-CL", {
-        timeZone: "America/Santiago",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-      }).format(new Date());
-      clock.dateTime = new Date().toISOString();
-    }
-  };
-  updateClock();
-  setInterval(updateClock, 60000);
-</script>

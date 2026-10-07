@@ -19,6 +19,7 @@
     "@types/react-dom": "^19.1.9",
     "astro": "^5.18.0",
     "caniuse-lite": "^1.0.30001774",
+    "embla-carousel": "^8.6.0",
     "firebase": "^12.9.0",
     "gsap": "^3.15.0",
     "ogl": "^1.0.11",

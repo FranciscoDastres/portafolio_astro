@@ -1,11 +1,69 @@
-<header class="site-header wrap">
-  <a class="wordmark" href="#home" aria-label="Francisco Dastres, inicio"
-    >fd<span class="brand-dot">.</span></a
+<header class="site-header">
+  <button
+    class="menu-trigger"
+    type="button"
+    id="menu-open"
+    aria-haspopup="dialog"
+    aria-controls="site-menu"
+    aria-expanded="false"
+    hidden
+    ><span class="hamburger" aria-hidden="true"><i></i><i></i></span><span
+      >Menú</span
+    ></button
   >
-  <nav aria-label="Navegación principal">
-    <a href="#projects">Proyectos</a><a href="#about">Sobre mí</a><a
-      class="nav-contact"
-      href="#contact">Hablemos <span aria-hidden="true">↗</span></a
-    >
-  </nav>
+  <a class="site-name" href="#home">Francisco Meza Dastres</a>
+  <time id="local-time" aria-label="Hora de Santiago"></time>
+  <noscript
+    ><nav>
+      <a href="#projects">Proyectos</a><a href="#stack">Stack</a><a
+        href="#contact">Contacto</a>
+    </nav></noscript
+  >
 </header>
+<dialog id="site-menu" aria-label="Menú principal">
+  <div class="menu-shell">
+    <div class="menu-top">
+      <button
+        class="menu-close"
+        id="menu-close"
+        type="button"
+        aria-label="Cerrar menú"
+        ><span aria-hidden="true">×</span> Cerrar</button
+      ><span>Francisco Meza Dastres</span>
+    </div><nav aria-label="Navegación principal">
+      {
+        [
+          { name: "Inicio", href: "#home" },
+          { name: "Proyectos", href: "#projects" },
+          { name: "Mi stack", href: "#stack" },
+          { name: "Sobre mí", href: "#about" },
+          { name: "Contacto", href: "#contact" },
+        ].map((item) => (
+          <a href={item.href}>
+            <>
+              <span>{item.name}</span>
+              <span class="menu-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </>
+          </a>
+        ))
+      }
+    </nav><div class="menu-bottom">
+      <p>Ingeniero Informático<br />y Desarrollador Full Stack</p><div>
+        <a
+          href="https://github.com/FranciscoDastres"
+          target="_blank"
+          rel="noopener noreferrer">GitHub ↗</a
+        ><a
+          href="https://linkedin.com/in/francisco-meza-dastres"
+          target="_blank"
+          rel="noopener noreferrer">LinkedIn ↗</a
+        ><a href="mailto:francisco.meza.amazon.dev@gmail.com">Email ↗</a>
+      </div><span>Santiago, Chile</span>
+    </div>
+  </div>
+</dialog>
+<script>
+  import "../scripts/navigation";
+</script>

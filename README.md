@@ -21,10 +21,12 @@ El build ejecuta `astro check` y genera el sitio estático en `dist/`.
 ## Contenido
 
 - `src/data/projects.ts`: proyectos, capturas, tecnologías y enlaces.
-- `src/components/home.astro`: presentación y composición de proyectos.
-- `src/components/about.astro`: experiencia y tecnologías principales.
-- `src/scripts/motion.ts`: entrada de portada, flotación, parallax, interacción con cursor y pausa de animaciones. Respeta movimiento reducido y guarda la preferencia de pausa.
-- `src/components/process.astro`: proceso de trabajo desplegable.
+- `src/components/home.astro`: portada inmersiva con arte original y presentación personal.
+- `src/components/nav.astro`: menú de pantalla completa con diálogo nativo, teclado y foco.
+- `src/components/projects.astro` y `src/scripts/carousel.ts`: carrusel Embla con miniaturas, arrastre, navegación por teclado y detalles de cada proyecto. El avance automático se activa de forma explícita y se detiene al interactuar.
+- `src/components/stack.astro`: fichas de tecnologías con selección por cursor, teclado y toque.
+- `src/components/about.astro`: experiencia y presentación personal.
+- `src/scripts/motion.ts`: entrada de portada, movimiento del fondo, parallax y pausa de animaciones. Respeta movimiento reducido y guarda la preferencia de pausa.
 - `src/components/music.astro`: playlist de Spotify.
 - `src/components/contact.astro`: formulario Formspree y correo directo.
 - `src/styles/global.css`: colores, tipografía, composición y estilos responsive.
